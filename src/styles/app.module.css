@@ -1,0 +1,108 @@
+/* App Shell Styles */
+
+.shell {
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Index Toggle Button */
+.indexToggle {
+  position: fixed;
+  top: var(--space-5);
+  left: var(--space-5);
+  z-index: var(--z-overlay);
+  padding: var(--space-2) var(--space-3);
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.indexToggle:hover {
+  background: var(--panel-hover);
+  border-color: var(--panel-border-hover);
+  color: var(--text);
+}
+
+/* Index Overlay */
+.indexOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(5, 6, 8, 0.96);
+  backdrop-filter: blur(4px);
+}
+
+.indexContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  text-align: center;
+}
+
+.indexLabel {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--faint);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+}
+
+.indexNav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.indexLink {
+  font-family: var(--font-mono);
+  font-size: var(--text-lg);
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-2) var(--space-4);
+  transition: color var(--transition-fast);
+}
+
+.indexLink:hover,
+.indexLink:focus-visible {
+  color: var(--text);
+}
+
+.closeIndex {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--faint);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-2);
+  margin-top: var(--space-4);
+  transition: color var(--transition-fast);
+}
+
+.closeIndex:hover {
+  color: var(--muted);
+}
+
+/* Main Content */
+.main {
+  position: relative;
+  z-index: var(--z-base);
+}

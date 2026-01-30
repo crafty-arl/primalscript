@@ -1,0 +1,224 @@
+/* Access Styles */
+
+.access {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-7);
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+}
+
+.sectionTitle {
+  font-size: var(--text-xs);
+  color: var(--faint);
+  letter-spacing: var(--tracking-wider);
+}
+
+/* Panel */
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  box-shadow: var(--glow-panel);
+}
+
+.panelTitle {
+  font-size: var(--text-lg);
+  color: var(--text);
+  text-transform: none;
+  letter-spacing: var(--tracking-normal);
+}
+
+.panelDesc {
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+/* Price Options */
+.priceOptions {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.priceBtn {
+  flex: 1;
+  min-width: 70px;
+  padding: var(--space-3) var(--space-4);
+  background: transparent;
+  border: 1px solid var(--panel-border);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.priceBtn:hover {
+  background: var(--panel-hover);
+  border-color: var(--panel-border-hover);
+  color: var(--text);
+}
+
+.priceBtn.selected {
+  background: var(--panel-hover);
+  border-color: var(--accent-dim);
+  color: var(--accent);
+}
+
+/* Custom Input */
+.customInput {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  overflow: hidden;
+}
+
+.currencySymbol {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+.input {
+  flex: 1;
+  padding: var(--space-3);
+  background: var(--bg);
+  border: 1px solid var(--panel-border);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  transition:
+    border-color var(--transition-fast);
+}
+
+.input:focus {
+  border-color: var(--accent-dim);
+  outline: none;
+}
+
+.input.error {
+  border-color: var(--danger);
+}
+
+/* Purchase Button */
+.purchaseBtn {
+  padding: var(--space-4);
+  background: transparent;
+  border: 1px solid var(--panel-border);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.purchaseBtn:hover {
+  background: var(--panel-hover);
+  border-color: var(--panel-border-hover);
+}
+
+/* Email Form */
+.emailForm {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.inputWrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.emailInput {
+  width: 100%;
+}
+
+.errorText {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--danger);
+}
+
+.notifyBtn {
+  padding: var(--space-3) var(--space-5);
+  background: transparent;
+  border: 1px solid var(--panel-border);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.notifyBtn:hover {
+  background: var(--panel-hover);
+  border-color: var(--panel-border-hover);
+  color: var(--text);
+}
+
+/* Toast */
+.toastContainer {
+  position: fixed;
+  top: var(--space-5);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: calc(var(--z-modal) + 1);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.toast {
+  padding: var(--space-3) var(--space-5);
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--text);
+  white-space: nowrap;
+  box-shadow: var(--glow-panel);
+}
+
+.toast.success {
+  border-color: var(--accent-dim);
+}
+
+.toast.info {
+  border-color: var(--panel-border-hover);
+}
+
+@media (max-width: 768px) {
+  .panel {
+    padding: var(--space-5);
+  }
+
+  .emailForm {
+    flex-direction: column;
+  }
+
+  .priceBtn {
+    min-width: calc(50% - var(--space-1));
+  }
+}

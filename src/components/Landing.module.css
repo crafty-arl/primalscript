@@ -1,0 +1,75 @@
+/* Landing Styles */
+
+.landing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  min-height: 60vh;
+}
+
+.title {
+  font-size: clamp(var(--text-lg), 4vw, var(--text-2xl));
+  font-weight: 300;
+  color: var(--text);
+  text-transform: none;
+  letter-spacing: var(--tracking-normal);
+  text-align: center;
+  max-width: 600px;
+  line-height: var(--leading-relaxed);
+}
+
+.enterButton {
+  padding: var(--space-3) var(--space-6);
+  background: transparent;
+  border: 1px solid var(--panel-border);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.enterButton:hover {
+  background: var(--panel);
+  border-color: var(--panel-border-hover);
+  color: var(--text);
+}
+
+.enterButton:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.timestamp {
+  position: fixed;
+  bottom: var(--space-5);
+  left: var(--space-5);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--faint);
+  letter-spacing: var(--tracking-wide);
+}
+
+.logLabel {
+  color: var(--muted);
+  margin-right: var(--space-2);
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: var(--text-lg);
+    padding: 0 var(--space-4);
+  }
+
+  .timestamp {
+    bottom: var(--space-4);
+    left: var(--space-4);
+  }
+}

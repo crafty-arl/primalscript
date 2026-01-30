@@ -1,0 +1,30 @@
+/* Footer Styles */
+
+.footer {
+  padding: var(--space-10) var(--space-5) var(--space-8);
+  border-top: 1px solid var(--panel-border);
+}
+
+.content {
+  max-width: var(--max-content);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  text-align: center;
+}
+
+.tagline {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--muted);
+  letter-spacing: var(--tracking-wide);
+}
+
+.copyright {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--faint);
+  letter-spacing: var(--tracking-wide);
+}

@@ -1,0 +1,30 @@
+/* Section Styles */
+
+.section {
+  position: relative;
+  width: 100%;
+  padding: var(--space-10) var(--space-5);
+}
+
+.fullHeight {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.centered {
+  text-align: center;
+}
+
+.content {
+  width: 100%;
+  max-width: var(--max-content);
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: var(--space-8) var(--space-4);
+  }
+}

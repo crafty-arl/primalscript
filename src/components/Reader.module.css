@@ -1,0 +1,391 @@
+/* Reader Styles */
+
+.reader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.nightFilter {
+  filter: brightness(0.85) contrast(0.95);
+}
+
+/* Header */
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.sectionTitle {
+  font-size: var(--text-xs);
+  color: var(--faint);
+  letter-spacing: var(--tracking-wider);
+}
+
+/* Book Navigation */
+.bookNav {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.bookPill {
+  padding: var(--space-2) var(--space-4);
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.bookPill:hover {
+  background: var(--panel-hover);
+  border-color: var(--panel-border-hover);
+  color: var(--text);
+}
+
+.bookPill.active {
+  background: var(--panel-hover);
+  border-color: var(--accent-dim);
+  color: var(--accent);
+}
+
+/* Chapter Selector */
+.chapterSelectWrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.chapterLabel {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--faint);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+}
+
+.chapterSelect {
+  flex: 1;
+  max-width: 400px;
+  padding: var(--space-2) var(--space-3);
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.chapterSelect:hover {
+  background: var(--panel-hover);
+  border-color: var(--panel-border-hover);
+}
+
+.chapterSelect:focus {
+  outline: 1px solid var(--accent-dim);
+  outline-offset: 1px;
+}
+
+.chapterSelect option {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--panel-border);
+  border-bottom: 1px solid var(--panel-border);
+}
+
+.fontControls {
+  display: flex;
+  gap: var(--space-1);
+}
+
+.fontBtn {
+  padding: var(--space-1) var(--space-2);
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.fontBtn:hover {
+  color: var(--text);
+}
+
+.fontBtn.active {
+  border-color: var(--panel-border);
+  color: var(--text);
+}
+
+.nightBtn {
+  padding: var(--space-1) var(--space-3);
+  background: transparent;
+  border: 1px solid var(--panel-border);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.nightBtn:hover {
+  background: var(--panel);
+  color: var(--text);
+}
+
+.nightBtn.active {
+  background: var(--panel);
+  border-color: var(--accent-dim);
+  color: var(--accent);
+}
+
+/* Document */
+.documentWrapper {
+  position: relative;
+  padding-left: var(--space-8);
+}
+
+.ruler {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-4) 0;
+}
+
+.rulerMark {
+  width: 12px;
+  height: 1px;
+  background: var(--panel-border);
+}
+
+.document {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  padding: var(--space-7);
+  box-shadow: var(--glow-panel);
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.chapterHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-7);
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid var(--panel-border);
+}
+
+.bookLabel {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+}
+
+.chapterTitle {
+  font-size: var(--text-xl);
+  font-weight: 400;
+  color: var(--text);
+  text-transform: none;
+  letter-spacing: var(--tracking-normal);
+}
+
+.wordCount {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--faint);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.body p {
+  color: var(--text);
+  line-height: var(--leading-relaxed);
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.body em {
+  font-style: italic;
+  color: var(--text);
+}
+
+.body strong {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--panel-border);
+  margin: var(--space-6) 0;
+}
+
+.blockquote {
+  border-left: 2px solid var(--accent-dim);
+  padding-left: var(--space-4);
+  margin: var(--space-4) 0;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.body ul,
+.body ol {
+  margin: var(--space-4) 0;
+  padding-left: var(--space-6);
+  color: var(--text);
+}
+
+.body li {
+  margin-bottom: var(--space-2);
+  line-height: var(--leading-relaxed);
+}
+
+/* Chapter Navigation */
+.chapterNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-4) 0;
+  border-top: 1px solid var(--panel-border);
+}
+
+.navBtn {
+  padding: var(--space-2) var(--space-4);
+  background: transparent;
+  border: 1px solid var(--panel-border);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.navBtn:hover:not(:disabled) {
+  background: var(--panel);
+  border-color: var(--panel-border-hover);
+  color: var(--text);
+}
+
+.navBtn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.chapterIndicator {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--faint);
+}
+
+/* Continue */
+.continueWrapper {
+  display: flex;
+  justify-content: center;
+  padding-top: var(--space-6);
+}
+
+.continueBtn {
+  padding: var(--space-3) var(--space-6);
+  background: transparent;
+  border: 1px solid var(--panel-border);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.continueBtn:hover {
+  background: var(--panel);
+  border-color: var(--panel-border-hover);
+  color: var(--text);
+}
+
+@media (max-width: 768px) {
+  .controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .documentWrapper {
+    padding-left: 0;
+  }
+
+  .ruler {
+    display: none;
+  }
+
+  .document {
+    padding: var(--space-5);
+    max-height: 60vh;
+  }
+
+  .bookNav {
+    flex-direction: column;
+  }
+
+  .bookPill {
+    width: 100%;
+    text-align: center;
+  }
+
+  .chapterSelectWrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .chapterSelect {
+    max-width: 100%;
+    width: 100%;
+  }
+}

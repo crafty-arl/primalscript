@@ -1,0 +1,73 @@
+/* Noise Overlay Styles */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-noise);
+  pointer-events: none;
+  opacity: var(--noise-intensity, 0.08);
+}
+
+.overlay::before {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  background-image:
+    repeating-radial-gradient(
+      circle at 50% 50%,
+      transparent 0,
+      rgba(255, 255, 255, 0.02) 1px,
+      transparent 2px,
+      transparent 4px
+    ),
+    repeating-radial-gradient(
+      circle at 25% 25%,
+      transparent 0,
+      rgba(0, 0, 0, 0.03) 1px,
+      transparent 2px,
+      transparent 3px
+    );
+  background-size: 4px 4px, 3px 3px;
+  animation: grain 0.5s steps(10) infinite;
+}
+
+@keyframes grain {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-1%, -1%);
+  }
+  20% {
+    transform: translate(1%, 0.5%);
+  }
+  30% {
+    transform: translate(-0.5%, 1%);
+  }
+  40% {
+    transform: translate(0.5%, -0.5%);
+  }
+  50% {
+    transform: translate(-1%, 0.5%);
+  }
+  60% {
+    transform: translate(1%, -1%);
+  }
+  70% {
+    transform: translate(-0.5%, -0.5%);
+  }
+  80% {
+    transform: translate(0.5%, 1%);
+  }
+  90% {
+    transform: translate(0, -1%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay::before {
+    animation: none;
+  }
+}

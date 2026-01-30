@@ -1,0 +1,53 @@
+/* Scroll Progress / Signal Strength Bar Styles */
+
+.container {
+  position: fixed;
+  right: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: var(--z-overlay);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.track {
+  width: 3px;
+  height: 120px;
+  background: var(--panel-border);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.fill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to top,
+    var(--accent-dim),
+    var(--accent)
+  );
+  transform-origin: bottom center;
+  border-radius: 2px;
+}
+
+.label {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--faint);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+}
+
+@media (max-width: 768px) {
+  .container {
+    display: none;
+  }
+}
