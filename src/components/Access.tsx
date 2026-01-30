@@ -4,6 +4,7 @@ import { useState, type FormEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Section } from './Section';
 import { useReducedMotion } from '../hooks/useReducedMotion';
+import { useAccess } from '../context/AccessContext';
 import styles from './Access.module.css';
 
 type PriceOption = 5 | 10 | 20 | 'custom';
@@ -16,6 +17,7 @@ interface ToastMessage {
 
 export function Access() {
   const prefersReducedMotion = useReducedMotion();
+  const { hasPaidAccess, setPaidAccess } = useAccess();
   const [selectedPrice, setSelectedPrice] = useState<PriceOption | null>(null);
   const [customPrice, setCustomPrice] = useState('');
   const [email, setEmail] = useState('');
@@ -48,7 +50,9 @@ export function Access() {
       return;
     }
 
-    showToast('Access request logged. Delivery method: manual.', 'success');
+    // Grant access (in production, this would verify payment)
+    setPaidAccess(true);
+    showToast('Full access granted. The complete trilogy is now unlocked.', 'success');
     setSelectedPrice(null);
     setCustomPrice('');
   };
@@ -101,57 +105,103 @@ export function Access() {
           <h2 className={styles.sectionTitle}>Access</h2>
         </header>
 
-        {/* Purchase Panel */}
+        {/* Free Book Panel */}
         <div className={styles.panel}>
-          <h3 className={styles.panelTitle}>Unseal the Manuscript</h3>
+          <div className={styles.freeHeader}>
+            <span className={styles.freeTag}>FREE</span>
+            <h3 className={styles.panelTitle}>Midnight Sun</h3>
+          </div>
           <p className={styles.panelDesc}>
-            Pay what you can: $5–$20
+            Experience the complete first book. FBI Agent Maya Thorne's headaches reveal more than migraines—they reveal truths that will fracture reality itself.
           </p>
+          <ul className={styles.includesList}>
+            <li>The complete Midnight Sun manuscript</li>
+            <li>All Book 1 archive materials</li>
+            <li>No account required</li>
+          </ul>
+          <div className={styles.freeStatus}>
+            Available now — Start reading above
+          </div>
+        </div>
 
-          <div className={styles.priceOptions}>
-            {[5, 10, 20].map((price) => (
+        {/* Purchase Panel */}
+        {hasPaidAccess ? (
+          <div className={styles.panel}>
+            <div className={styles.unlockedHeader}>
+              <span className={styles.unlockedTag}>UNLOCKED</span>
+              <h3 className={styles.panelTitle}>Full Trilogy Access</h3>
+            </div>
+            <p className={styles.panelDesc}>
+              You have complete access to the entire Midnight Sun trilogy.
+            </p>
+            <ul className={styles.includesList}>
+              <li>Book 2: Project Chimera — The signal spreads</li>
+              <li>Book 3: PERFECT — The signal ends</li>
+              <li>All classified archive entries</li>
+              <li>Complete lore documentation</li>
+            </ul>
+          </div>
+        ) : (
+          <div className={styles.panel}>
+            <div className={styles.paidHeader}>
+              <span className={styles.paidTag}>UNLOCK</span>
+              <h3 className={styles.panelTitle}>Complete the Journey</h3>
+            </div>
+            <p className={styles.panelDesc}>
+              Unlock Books 2 & 3 plus all classified archive entries. Pay what you can.
+            </p>
+            <ul className={styles.includesList}>
+              <li>Book 2: Project Chimera — The signal spreads</li>
+              <li>Book 3: PERFECT — The signal ends</li>
+              <li>All classified archive entries</li>
+              <li>Complete lore documentation</li>
+            </ul>
+
+            <div className={styles.priceOptions}>
+              {[5, 10, 20].map((price) => (
+                <button
+                  key={price}
+                  className={`${styles.priceBtn} ${selectedPrice === price ? styles.selected : ''}`}
+                  onClick={() => handlePriceSelect(price as PriceOption)}
+                >
+                  ${price}
+                </button>
+              ))}
               <button
-                key={price}
-                className={`${styles.priceBtn} ${selectedPrice === price ? styles.selected : ''}`}
-                onClick={() => handlePriceSelect(price as PriceOption)}
+                className={`${styles.priceBtn} ${selectedPrice === 'custom' ? styles.selected : ''}`}
+                onClick={() => handlePriceSelect('custom')}
               >
-                ${price}
+                Custom
               </button>
-            ))}
-            <button
-              className={`${styles.priceBtn} ${selectedPrice === 'custom' ? styles.selected : ''}`}
-              onClick={() => handlePriceSelect('custom')}
-            >
-              Custom
+            </div>
+
+            <AnimatePresence>
+              {selectedPrice === 'custom' && (
+                <motion.div
+                  className={styles.customInput}
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: prefersReducedMotion ? 0 : 0.2 }}
+                >
+                  <span className={styles.currencySymbol}>$</span>
+                  <input
+                    type="number"
+                    min="1"
+                    placeholder="Amount"
+                    value={customPrice}
+                    onChange={(e) => setCustomPrice(e.target.value)}
+                    className={styles.input}
+                  />
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            <button className={styles.purchaseBtn} onClick={handlePurchase}>
+              Unlock Full Trilogy
             </button>
           </div>
-
-          <AnimatePresence>
-            {selectedPrice === 'custom' && (
-              <motion.div
-                className={styles.customInput}
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: 'auto', opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: prefersReducedMotion ? 0 : 0.2 }}
-              >
-                <span className={styles.currencySymbol}>$</span>
-                <input
-                  type="number"
-                  min="1"
-                  placeholder="Amount"
-                  value={customPrice}
-                  onChange={(e) => setCustomPrice(e.target.value)}
-                  className={styles.input}
-                />
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          <button className={styles.purchaseBtn} onClick={handlePurchase}>
-            Request Access
-          </button>
-        </div>
+        )}
 
         {/* Mailing List Panel */}
         <div className={styles.panel}>

@@ -17,19 +17,19 @@ export const readingOrder = [
     order: 1,
     title: 'Midnight Sun',
     tagline: 'Where the signal began.',
-    description: 'FBI Agent Maya Thorne experiences headaches that reveal more than migraines. When reality fractures, she must navigate a world where the line between perception and truth no longer exists.'
+    description: 'FBI Agent Maya Thorne\'s headaches reveal more than migraines. They reveal truths about reality itself. When perception fractures, who can she trust?'
   },
   {
     order: 2,
     title: 'Project Chimera',
     tagline: 'Where the signal spread.',
-    description: 'The phenomenon expands. New players emerge. The architecture of something vast begins to reveal itself—and the cost of understanding becomes clear.'
+    description: 'The phenomenon expands beyond what anyone anticipated. New players emerge from the shadows. The cost of understanding becomes devastatingly clear.'
   },
   {
     order: 3,
     title: 'PERFECT',
     tagline: 'Where the signal ends.',
-    description: 'Everything converges. The final questions demand answers. What began as headaches becomes something that will redefine existence itself.'
+    description: 'Everything converges in a finale that answers questions you didn\'t know to ask. The signal has a purpose. Existence itself will be redefined.'
   }
 ];
 

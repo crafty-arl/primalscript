@@ -6,10 +6,12 @@ import ReactMarkdown from 'react-markdown';
 import { Section } from './Section';
 import { books, type Book, type Chapter } from '../content/allBooks';
 import { useReducedMotion } from '../hooks/useReducedMotion';
+import { useAccess, isBookFree } from '../context/AccessContext';
 import styles from './Reader.module.css';
 
 interface ReaderProps {
   onContinue: () => void;
+  onRequestAccess: () => void;
 }
 
 type FontSize = 'small' | 'medium' | 'large';
@@ -25,8 +27,9 @@ const NIGHT_FILTER_KEY = 'midnight-sun-night-filter';
 const BOOK_KEY = 'midnight-sun-book';
 const CHAPTER_KEY = 'midnight-sun-chapter';
 
-export function Reader({ onContinue }: ReaderProps) {
+export function Reader({ onContinue, onRequestAccess }: ReaderProps) {
   const prefersReducedMotion = useReducedMotion();
+  const { hasPaidAccess } = useAccess();
   const [activeBook, setActiveBook] = useState<Book>(books[0]);
   const [activeChapter, setActiveChapter] = useState<Chapter>(books[0].chapters[0]);
   const [fontSize, setFontSize] = useState<FontSize>('medium');
@@ -109,18 +112,28 @@ export function Reader({ onContinue }: ReaderProps) {
         <header className={styles.header}>
           <h2 className={styles.sectionTitle}>Read</h2>
 
-          {/* Book Selector */}
+          {/* Book Selector - Only show available books */}
           <nav className={styles.bookNav} aria-label="Book selection">
-            {books.map((book) => (
+            {books
+              .filter((book) => hasPaidAccess || isBookFree(book.title))
+              .map((book) => (
+                <button
+                  key={book.title}
+                  className={`${styles.bookPill} ${activeBook.title === book.title ? styles.active : ''}`}
+                  onClick={() => handleBookSelect(book)}
+                  aria-current={activeBook.title === book.title ? 'true' : undefined}
+                >
+                  {book.title}
+                </button>
+              ))}
+            {!hasPaidAccess && (
               <button
-                key={book.title}
-                className={`${styles.bookPill} ${activeBook.title === book.title ? styles.active : ''}`}
-                onClick={() => handleBookSelect(book)}
-                aria-current={activeBook.title === book.title ? 'true' : undefined}
+                className={`${styles.bookPill} ${styles.unlockPill}`}
+                onClick={onRequestAccess}
               >
-                {book.title}
+                Unlock More
               </button>
-            ))}
+            )}
           </nav>
 
           {/* Chapter Selector */}

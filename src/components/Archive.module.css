@@ -6,6 +6,35 @@
   gap: var(--space-7);
 }
 
+/* Current Book Section (Free users) */
+.currentBook {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  padding: var(--space-6);
+  margin-bottom: var(--space-4);
+}
+
+.currentBookTitle {
+  font-size: var(--text-xl);
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: var(--space-2);
+}
+
+.currentBookTagline {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--accent);
+  font-style: italic;
+  margin-bottom: var(--space-4);
+}
+
+.currentBookDesc {
+  font-size: var(--text-sm);
+  color: var(--muted);
+  line-height: var(--leading-relaxed);
+}
+
 /* Reading Order Section */
 .readingOrder {
   background: var(--panel);
@@ -78,6 +107,39 @@
   margin-top: var(--space-2);
 }
 
+.freeLabel {
+  margin-left: var(--space-2);
+  padding: 2px 6px;
+  background: rgba(80, 200, 120, 0.15);
+  border: 1px solid rgba(80, 200, 120, 0.3);
+  color: rgba(80, 200, 120, 0.9);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  vertical-align: middle;
+}
+
+.lockLabel {
+  margin-left: var(--space-2);
+  padding: 2px 6px;
+  background: rgba(255, 180, 80, 0.15);
+  border: 1px solid rgba(255, 180, 80, 0.3);
+  color: rgba(255, 180, 80, 0.9);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  vertical-align: middle;
+}
+
+.lockedCard {
+  opacity: 0.7;
+  border-left-color: rgba(255, 180, 80, 0.3);
+}
+
+.lockedCard:hover {
+  border-left-color: rgba(255, 180, 80, 0.5);
+}
+
 /* Header */
 .header {
   display: flex;
@@ -94,6 +156,11 @@
 .sectionDesc {
   font-size: var(--text-sm);
   color: var(--muted);
+}
+
+.lockedNote {
+  color: rgba(255, 180, 80, 0.8);
+  font-style: italic;
 }
 
 /* Filter Bar */
@@ -169,6 +236,26 @@
 
 .entry.expanded {
   border-color: var(--panel-border-hover);
+}
+
+.entry.lockedEntry {
+  opacity: 0.6;
+  border-color: rgba(255, 180, 80, 0.2);
+}
+
+.entry.lockedEntry:hover {
+  opacity: 0.8;
+  border-color: rgba(255, 180, 80, 0.4);
+}
+
+.lockedBadge {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  padding: 2px 6px;
+  background: rgba(255, 180, 80, 0.15);
+  border: 1px solid rgba(255, 180, 80, 0.3);
+  color: rgba(255, 180, 80, 0.9);
+  letter-spacing: 0.05em;
 }
 
 .entryHeader {

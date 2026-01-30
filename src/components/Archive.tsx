@@ -6,6 +6,7 @@ import { Section } from './Section';
 import { GlitchText } from './GlitchText';
 import { archiveEntries, readingOrder, type ArchiveEntry } from '../content/archive';
 import { useReducedMotion } from '../hooks/useReducedMotion';
+import { useAccess } from '../context/AccessContext';
 import styles from './Archive.module.css';
 
 interface ArchiveProps {
@@ -13,6 +14,11 @@ interface ArchiveProps {
 }
 
 type BookFilter = 'All' | 'Series' | 'Midnight Sun' | 'Project Chimera' | 'PERFECT';
+
+// Check if a lore entry is free (from Book 1 or Series-wide)
+function isEntryFree(entry: ArchiveEntry): boolean {
+  return entry.book === 'Series' || entry.book === 'Midnight Sun';
+}
 
 function formatDate(isoDate: string): string {
   const date = new Date(isoDate);
@@ -132,6 +138,7 @@ function ArchiveEntryCard({
 }
 
 export function Archive({ onCrossReference }: ArchiveProps) {
+  const { hasPaidAccess } = useAccess();
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [bookFilter, setBookFilter] = useState<BookFilter>('All');
 
@@ -139,29 +146,50 @@ export function Archive({ onCrossReference }: ArchiveProps) {
     setExpandedId((current) => (current === id ? null : id));
   }, []);
 
-  const filteredEntries = bookFilter === 'All'
+  // Only show entries the user has access to
+  const availableEntries = hasPaidAccess
     ? archiveEntries
-    : archiveEntries.filter(entry => entry.book === bookFilter);
+    : archiveEntries.filter(entry => isEntryFree(entry));
+
+  // Available filters based on access
+  const availableFilters: BookFilter[] = hasPaidAccess
+    ? ['All', 'Series', 'Midnight Sun', 'Project Chimera', 'PERFECT']
+    : ['All', 'Series', 'Midnight Sun'];
+
+  const filteredEntries = bookFilter === 'All'
+    ? availableEntries
+    : availableEntries.filter(entry => entry.book === bookFilter);
 
   return (
     <Section id="archive">
       <div className={styles.archive}>
-        {/* Reading Order */}
-        <div className={styles.readingOrder}>
-          <h3 className={styles.readingOrderTitle}>Recommended Reading Order</h3>
-          <div className={styles.readingOrderGrid}>
-            {readingOrder.map((book) => (
-              <div key={book.order} className={styles.readingOrderCard}>
-                <span className={styles.orderNumber}>{book.order}</span>
-                <div className={styles.orderContent}>
-                  <h4 className={styles.orderTitle}>{book.title}</h4>
-                  <span className={styles.orderTagline}>{book.tagline}</span>
-                  <p className={styles.orderDesc}>{book.description}</p>
-                </div>
-              </div>
-            ))}
+        {/* Current Book Info - Only show Book 1 for free users */}
+        {!hasPaidAccess ? (
+          <div className={styles.currentBook}>
+            <h3 className={styles.currentBookTitle}>Midnight Sun</h3>
+            <p className={styles.currentBookTagline}>Where the signal began.</p>
+            <p className={styles.currentBookDesc}>
+              Explore recovered documentation from the Midnight Sun investigation.
+              These files contain classified materials related to Agent Thorne's case.
+            </p>
           </div>
-        </div>
+        ) : (
+          <div className={styles.readingOrder}>
+            <h3 className={styles.readingOrderTitle}>Complete Archive</h3>
+            <div className={styles.readingOrderGrid}>
+              {readingOrder.map((book) => (
+                <div key={book.order} className={styles.readingOrderCard}>
+                  <span className={styles.orderNumber}>{book.order}</span>
+                  <div className={styles.orderContent}>
+                    <h4 className={styles.orderTitle}>{book.title}</h4>
+                    <span className={styles.orderTagline}>{book.tagline}</span>
+                    <p className={styles.orderDesc}>{book.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         <header className={styles.header}>
           <h2 className={styles.sectionTitle}>Lore Archive</h2>
@@ -174,7 +202,7 @@ export function Archive({ onCrossReference }: ArchiveProps) {
         <div className={styles.filterBar}>
           <span className={styles.filterLabel}>Filter by source:</span>
           <div className={styles.filterButtons}>
-            {(['All', 'Series', 'Midnight Sun', 'Project Chimera', 'PERFECT'] as BookFilter[]).map((filter) => (
+            {availableFilters.map((filter) => (
               <button
                 key={filter}
                 className={`${styles.filterBtn} ${bookFilter === filter ? styles.active : ''}`}

@@ -39,6 +39,85 @@
 .panelDesc {
   font-size: var(--text-sm);
   color: var(--muted);
+  line-height: var(--leading-relaxed);
+}
+
+/* Header variants */
+.freeHeader,
+.paidHeader,
+.unlockedHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.freeTag {
+  padding: 4px 10px;
+  background: rgba(80, 200, 120, 0.15);
+  border: 1px solid rgba(80, 200, 120, 0.3);
+  color: rgba(80, 200, 120, 0.9);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.paidTag {
+  padding: 4px 10px;
+  background: rgba(255, 180, 80, 0.15);
+  border: 1px solid rgba(255, 180, 80, 0.3);
+  color: rgba(255, 180, 80, 0.9);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.unlockedTag {
+  padding: 4px 10px;
+  background: rgba(130, 200, 255, 0.15);
+  border: 1px solid rgba(130, 200, 255, 0.3);
+  color: rgba(130, 200, 255, 0.9);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+/* Includes list */
+.includesList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.includesList li {
+  font-size: var(--text-sm);
+  color: var(--muted);
+  padding-left: var(--space-4);
+  position: relative;
+}
+
+.includesList li::before {
+  content: '+';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-family: var(--font-mono);
+}
+
+/* Free status */
+.freeStatus {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: rgba(80, 200, 120, 0.8);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--panel-border);
 }
 
 /* Price Options */
